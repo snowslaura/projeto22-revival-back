@@ -1,0 +1,35 @@
+{
+  "name": "projeto22-autoral-revival",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx nodemon ./src/server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.142.0",
+    "@prisma/client": "^4.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "json": "^11.0.0",
+    "multer": "^1.4.5-lts.1",
+    "multer-s3": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/aws-sdk": "^2.7.0",
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "@types/multer": "^1.4.7",
+    "@types/multer-s3": "^3.0.0",
+    "nodemon": "^2.0.19",
+    "prisma": "^4.1.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.7.4"
+  }
+}
