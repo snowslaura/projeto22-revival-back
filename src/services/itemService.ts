@@ -1,4 +1,4 @@
-import * as itemRepository from "./../respoitory/itemRepository.js"
+import * as itemRepository from "../respository/itemRepository.js"
 
 export async function postItem(dados){
     await itemRepository.postItem(dados)

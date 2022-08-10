@@ -1,5 +1,5 @@
 import { Items } from "@prisma/client";
-import prisma from "./../config/database.js"
+import prisma from "../config/database.js"
 
 export type CreateItem = Omit<Items, "id" | "createdAt">
 
