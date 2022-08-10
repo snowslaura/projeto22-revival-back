@@ -10,5 +10,16 @@ export async function postItem(dados:CreateItem){
 }
 
 export async function getItem(){
-    await prisma.items.findMany()
+    return await prisma.items.findMany({})
+}
+
+export async function getLatestItems(){
+    return await prisma.items.findMany({
+        where:{},
+        orderBy:{
+            createdAt: 'desc'
+        },
+        take: 5
+        
+    })
 }

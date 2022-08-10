@@ -5,5 +5,9 @@ export async function postItem(dados){
 }
 
 export async function getItem(){
-    await itemRepository.getItem()
+  return  await itemRepository.getItem()
+}
+
+export async function getLatestItems(){
+  return  await itemRepository.getLatestItems()
 }

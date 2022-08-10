@@ -18,16 +18,31 @@ model Users{
   password  String
   createdAt DateTime @default(now())
 
+  items     Items[]
+  offers    Offers[]
+  answers   Answers[]
+  questions Questions[]
+
   @@map("users")
 }
 
 model Items{
   id            Int  @id @default(autoincrement())
+  userId        Int
   imageUrl      String
   name          String
   size          Int
   priceRangeId  Int
+  categoryId    Int
   createdAt     DateTime @default(now())
+
+  users      Users    @relation(fields: [userId], references: [id])
+  priceRange PriceRange    @relation(fields: [priceRangeId], references: [id])
+  categories Categories    @relation(fields: [categoryId], references: [id])
+
+  offers Offers[]
+  questions Questions[]
+  answers Answers[]
 
   @@map("items")
 }
@@ -36,8 +51,18 @@ model Items{
 model PriceRange{
   id    Int  @id @default(autoincrement())
   range String @unique
+  items Items[]
 
   @@map("priceRange")
+}
+
+model Categories{
+  id    Int  @id @default(autoincrement())
+  name String @unique
+
+  items Items[]
+
+  @@map("categories")
 }
 
 model Offers{
@@ -45,6 +70,39 @@ model Offers{
   itemId      Int
   offerUserId Int
   createdAt   DateTime @default(now())
-    
+
+  users Users    @relation(fields: [offerUserId], references: [id])
+  items Items    @relation(fields: [itemId], references: [id])
   @@map("offers")
+}
+
+model Questions{
+  id          Int  @id @default(autoincrement())
+  itemId      Int
+  offerUserId Int
+  question    String
+  createdAt   DateTime @default(now())
+
+  items Items    @relation(fields: [itemId], references: [id])
+  users Users    @relation(fields: [offerUserId], references: [id])
+
+  answers     Answers[]
+    
+  @@map("questions")
+}
+
+model Answers{
+  id          Int  @id @default(autoincrement())
+  itemId      Int
+  OwnerUserId Int
+  questionId  Int
+  answer      String
+  createdAt   DateTime @default(now())
+
+  items Items    @relation(fields: [itemId], references: [id])
+  users Users    @relation(fields: [OwnerUserId], references: [id])
+  questions Questions    @relation(fields: [questionId], references: [id])
+
+    
+  @@map("answers")
 }
