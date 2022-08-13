@@ -36,13 +36,14 @@ model Items{
   categoryId    Int
   createdAt     DateTime @default(now())
 
-  users      Users    @relation(fields: [userId], references: [id])
-  priceRange PriceRange    @relation(fields: [priceRangeId], references: [id])
-  categories Categories    @relation(fields: [categoryId], references: [id])
+  users       Users         @relation(fields: [userId], references: [id])
+  priceRange  PriceRange    @relation(fields: [priceRangeId], references: [id])
+  categories  Categories    @relation(fields: [categoryId], references: [id])
 
-  offers Offers[]
-  questions Questions[]
-  answers Answers[]
+  offerItemId Offers[]      @relation("itemOffer")
+  userItemId  Offers[]      @relation("itemUser")
+  questions   Questions[]
+  answers     Answers[]
 
   @@map("items")
 }
@@ -69,11 +70,14 @@ model Offers{
   id          Int  @id @default(autoincrement())
   itemId      Int
   offerUserId Int
+  offerItemId Int
   createdAt   DateTime @default(now())
 
-  users Users    @relation(fields: [offerUserId], references: [id])
-  items Items    @relation(fields: [itemId], references: [id])
-  @@map("offers")
+  users       Users     @relation(fields: [offerUserId], references: [id])
+  itemUser    Items     @relation("itemUser",fields: [itemId], references: [id])
+  itemOffer   Items     @relation("itemOffer",fields: [offerItemId], references: [id])
+  @@map("offers") 
+  
 }
 
 model Questions{
@@ -98,9 +102,9 @@ model Answers{
   questionId  Int
   answer      String
   createdAt   DateTime @default(now())
-
-  items Items    @relation(fields: [itemId], references: [id])
-  users Users    @relation(fields: [OwnerUserId], references: [id])
+  
+  items Items            @relation(fields: [itemId], references: [id])
+  users Users            @relation(fields: [OwnerUserId], references: [id])
   questions Questions    @relation(fields: [questionId], references: [id])
 
     

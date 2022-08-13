@@ -1,7 +1,6 @@
-import { Items } from "@prisma/client";
 import prisma from "../config/database.js"
+import { CreateItem } from "../types/Item.js";
 
-export type CreateItem = Omit<Items, "id" | "createdAt">
 
 export async function postItem(dados:CreateItem){
  await prisma.items.create({
@@ -11,6 +10,14 @@ export async function postItem(dados:CreateItem){
 
 export async function getItem(){
     return await prisma.items.findMany({})
+}
+
+export async function getUserItems(id:number){
+    return await prisma.items.findMany({
+        where:{
+            userId:id
+        }
+    })
 }
 
 export async function getLatestItems(){
