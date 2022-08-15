@@ -20,7 +20,7 @@ export const storageTypes = {
     }),
     s3: multerS3({
         s3: new S3Client({region:process.env.AWS_DEFAULT_REGION}),
-        bucket:'upload-revival',
+        bucket:'revival-upload',
         contentType: multerS3.AUTO_CONTENT_TYPE,
         acl:'public-read',  
         key:(req,file,cb)=>{

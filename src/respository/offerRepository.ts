@@ -8,12 +8,26 @@ export async function postOffer(dados:CreateOffer){
     })
 }
 
+
 export async function getUserItemWithOffers(userId:number){
     return await prisma.items.findMany({
-        where:{           
-           userId
+        where:{
+            userId,
+            userItemId:{
+                some:{                    
+                }
+           }
         }, include:{
-            userItemId:true
+            userItemId:{
+                select:{
+                    id:true,
+                    itemId:true,
+                    offerUserId:true,
+                    offerItemId:true,
+                    createdAt:true
+                }, 
+
+            }
         }
     })
 }

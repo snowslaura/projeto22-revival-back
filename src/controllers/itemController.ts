@@ -3,13 +3,12 @@ import * as itemService from "./../services/itemService.js"
 
 
 export async function postItem(req: Request, res: Response){
-    const priceRangeId = parseInt(req.body.priceRangeId)
-    
+    const priceRangeId = parseInt(req.body.priceRangeId)    
     const categoryId = parseInt(req.body.categoryId)
     const userId = res.locals.user.id   
+
     const {location : imageUrl, size, originalname:name} = req.file as Express.MulterS3.File     
     
-
     const dados = {
         imageUrl,
         size,
@@ -18,6 +17,7 @@ export async function postItem(req: Request, res: Response){
         userId,
         categoryId
     } 
+    
     
     await itemService.postItem(dados)
     res.sendStatus(201)
